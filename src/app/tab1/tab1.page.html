@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="#">
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <!-- Avatar com input de imagem -->
+      <ion-avatar (click)="selectImage()">
+        <img [src]="photo || 'assets/default-profile.png'" alt="Foto do Perfil" />
+      </ion-avatar>
+      <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" hidden />
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Nome -->
+      <ion-item>
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input [(ngModel)]="name" placeholder="Digite seu nome"></ion-input>
+      </ion-item>
+
+      <!-- E-mail -->
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input [(ngModel)]="email" placeholder="Digite seu e-mail"></ion-input>
+      </ion-item>
+
+      <!-- Apelido -->
+      <ion-item>
+        <ion-label position="stacked">Apelido</ion-label>
+        <ion-input [(ngModel)]="nickname" placeholder="Digite seu apelido"></ion-input>
+      </ion-item>
+
+      <!-- Número da Camiseta -->
+      <ion-item>
+        <ion-label position="stacked">Número da Camiseta</ion-label>
+        <ion-input [(ngModel)]="shirtNumber" type="number" placeholder="Digite o número da camiseta"></ion-input>
+      </ion-item>
+
+      <!-- Posição -->
+      <ion-item>
+        <ion-label>Posição</ion-label>
+        <ion-select [(ngModel)]="position" placeholder="Selecione sua posição">
+          <ion-select-option value="Atacante">Atacante</ion-select-option>
+          <ion-select-option value="Ponta Direita">Ponta Direita</ion-select-option>
+          <ion-select-option value="Ponta Esquerda">Ponta Esquerda</ion-select-option>
+          <ion-select-option value="Meio-campista">Meio-campista</ion-select-option>
+          <ion-select-option value="Volante">Volante</ion-select-option>
+          <ion-select-option value="Zagueiro">Zagueiro</ion-select-option>
+          <ion-select-option value="Lateral-Direito">Lateral-Direito</ion-select-option>
+          <ion-select-option value="Lateral-Esquerdo">Lateral-Esquerdo</ion-select-option>
+          <ion-select-option value="Goleiro">Goleiro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Data de Nascimento (Dia, Mês, Ano) -->
+      <div class="date-input-container">
+        <ion-item>
+          <ion-label position="stacked">Dia</ion-label>
+          <ion-input [(ngModel)]="day" type="number" placeholder="Dia" (ionChange)="calculateAge()"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Mês</ion-label>
+          <ion-input [(ngModel)]="month" type="number" placeholder="Mês" (ionChange)="calculateAge()"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Ano</ion-label>
+          <ion-input [(ngModel)]="year" type="number" placeholder="Ano" (ionChange)="calculateAge()"></ion-input>
+        </ion-item>
+      </div>
+
+      <!-- Idade -->
+      <ion-item>
+        <ion-label>Idade: </ion-label>
+        <ion-input [value]="age" readonly></ion-input>
+      </ion-item>
+
+      <!-- ID do Perfil -->
+      <ion-item>
+        <ion-label position="stacked">ID do Perfil</ion-label>
+        <ion-input [(ngModel)]="profileId" readonly></ion-input>
+      </ion-item>
+
+      <!-- Botão Salvar Perfil -->
+      <ion-button expand="block" (click)="saveProfile()">SALVAR PERFIL</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

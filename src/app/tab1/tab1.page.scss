@@ -1,0 +1,78 @@
+/* Estilizando o card */
+ion-card {
+  --background: #000; /* Fundo preto */
+  border-radius: 20px; /* Bordas arredondadas */
+  margin: 20px;
+}
+
+/* Centralizar o avatar */
+ion-card-header {
+  display: flex;
+  justify-content: center; /* Centraliza o avatar horizontalmente */
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* Estilo do avatar */
+ion-avatar {
+  --border-radius: 50%;
+  --size: 50px; /* Tamanho do avatar */
+  border: 3px solid #FFD700; /* Borda dourada ao redor do avatar */
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+/* Estilo do input e labels */
+ion-item {
+  --highlight-color-focused: #FFD700; /* Coloca destaque dourado ao focar no campo */
+  font-size: 14px; /* Reduz o tamanho da fonte dos labels */
+  --background: transparent; /* Fundo transparente para os itens */
+  color: #fff; /* Cor branca para o texto dos itens */
+  border-bottom: 1px solid #fff; /* Linha branca separadora */
+  margin-bottom: 15px; /* Espaçamento entre os itens */
+}
+
+ion-label {
+  color: #FFD700; /* Cor dourada para os labels */
+}
+
+ion-input {
+  font-size: 14px; /* Reduz o tamanho da fonte do texto dentro dos inputs */
+  color: #fff; /* Texto branco nos inputs */
+}
+
+/* Estilo do ion-select para posição */
+ion-select {
+  --placeholder-color: #fff; /* Placeholder branco */
+  --color: #fff; /* Texto branco */
+}
+
+/* Estilo dos inputs de Dia, Mês e Ano */
+.date-input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.date-input-container ion-item {
+  width: 30%;
+}
+
+/* Botão arredondado estilo pílula */
+ion-button {
+  --background: #FFD700; /* Fundo dourado */
+  --color: #000; /* Texto preto */
+  --border-radius: 9999px; /* Botão arredondado estilo pílula */
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4); /* Sombra suave */
+  margin-top: 20px;
+  width: 100%; /* Botão com largura total */
+}
+
+/* Estilo para ajustar o conteúdo dentro do ion-card */
+ion-card-content {
+  padding: 20px;
+}
