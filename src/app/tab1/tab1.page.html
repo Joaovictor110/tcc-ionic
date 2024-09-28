@@ -60,17 +60,68 @@
       <div class="date-input-container">
         <ion-item>
           <ion-label position="stacked">Dia</ion-label>
-          <ion-input [(ngModel)]="day" type="number" placeholder="Dia" (ionChange)="calculateAge()"></ion-input>
+          <ion-button id="modal-dia">{{day}}</ion-button>
+          <ion-modal #modalDia trigger="modal-dia" (didDismiss)="didDismissDay($event)">
+            <ng-template>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="modalDia.dismiss(oldDay, 'cancel')">Cancel</ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modalDia.dismiss(day, 'confirm')">Done</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <ion-picker>
+                <ion-picker-column [value]="day" (ionChange)="onDayChange($event)">
+                  <ion-picker-column-option *ngFor="let dia of dias"  [value]="dia">{{ dia }}</ion-picker-column-option>
+                </ion-picker-column>
+              </ion-picker>
+            </ng-template>
+          </ion-modal>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Mês</ion-label>
-          <ion-input [(ngModel)]="month" type="number" placeholder="Mês" (ionChange)="calculateAge()"></ion-input>
+          <ion-button id="modal-mes">{{month}}</ion-button>
+          <ion-modal #modalMes trigger="modal-mes" (didDismiss)="didDismissMonth($event)">
+            <ng-template>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="modalMes.dismiss(oldMonth, 'cancel')">Cancel</ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modalMes.dismiss(month, 'confirm')">Done</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <ion-picker>
+                <ion-picker-column [value]="month" (ionChange)="onMonthChange($event)">
+                  <ion-picker-column-option *ngFor="let mes of meses; let i = index" [value]="i+1">{{ mes }}</ion-picker-column-option>
+                </ion-picker-column>
+              </ion-picker>
+            </ng-template>
+          </ion-modal>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Ano</ion-label>
-          <ion-input [(ngModel)]="year" type="number" placeholder="Ano" (ionChange)="calculateAge()"></ion-input>
+          <ion-button id="modal-ano">{{year}}</ion-button>
+          <ion-modal #modalAno trigger="modal-ano" (didDismiss)="didDismissYear($event)">
+            <ng-template>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="modalAno.dismiss(oldYear, 'cancel')">Cancel</ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modalAno.dismiss(year, 'confirm')">Done</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <ion-picker>
+                <ion-picker-column [value]="year" (ionChange)="onYearChange($event)">
+                  <ion-picker-column-option *ngFor="let ano of anos" [value]="ano">{{ ano }}</ion-picker-column-option>
+                </ion-picker-column>
+              </ion-picker>
+            </ng-template>
+          </ion-modal>
         </ion-item>
       </div>
 
@@ -85,7 +136,7 @@
         <ion-label position="stacked">ID do Perfil</ion-label>
         <ion-input [(ngModel)]="profileId" readonly></ion-input>
       </ion-item>
-
+      
       <!-- Botão Salvar Perfil -->
       <ion-button expand="block" (click)="saveProfile()">SALVAR PERFIL</ion-button>
     </ion-card-content>

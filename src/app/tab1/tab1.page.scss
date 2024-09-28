@@ -76,3 +76,11 @@ ion-button {
 ion-card-content {
   padding: 20px;
 }
+
+ion-modal {
+  --height: auto;
+}
+
+ion-picker {
+  margin-bottom: var(--ion-safe-area-bottom);
+}

@@ -8,37 +8,74 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 export class Tab1Page {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;  // Referência ao input de arquivo
 
+  dias = Array.from({ length: 31 }, (_, i) => i + 1);
+  meses: string[] = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  ];
+  anos: number[] = [];
+
   // Variáveis para armazenar os dados do formulário
   name!: string;
   email!: string;
   nickname!: string;
   shirtNumber!: number;
   position!: string;
-  day!: number;
-  month!: number;
+  day: number = this.dias[0];
+  oldDay: number = this.day;
+  month: number = 1;
+  oldMonth: number = this.month;
   year!: number;
-  age!: number;
+  oldYear!: number;
+  age: number = 0;
   profileId: number = 12345; // Exemplo de ID fixo
   photo: string | ArrayBuffer = ''; // Variável para armazenar a URL da foto
 
-  constructor() {}
+  constructor() {
+    for (let year = 2024; year >= 1950; year--) {
+      this.anos.push(year);
+    }
 
-  // Função para abrir o seletor de arquivo do avatar
-  selectImage() {
-    if (this.fileInput && this.fileInput.nativeElement) {
-      this.fileInput.nativeElement.click(); // Aciona o clique no input de arquivo oculto
+    this.year = this.anos[0];
+    this.oldYear = this.year;
+  }
+
+  onDayChange(event: CustomEvent) {
+    this.day = event.detail.value;
+    this.oldDay = this.day;
+  }
+
+  didDismissDay(event: CustomEvent) {
+    if (!event.detail) {
+      this.day = event.detail.data;
+
+      this.calculateAge();
     }
   }
-  
-   // Função para tratar o upload de arquivo
-   onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.photo = reader.result || '';  // Garante que 'null' não seja atribuído
-      };
-      reader.readAsDataURL(file);
+
+  onMonthChange(event: CustomEvent) {
+    this.month = event.detail.value;
+    this.oldMonth = this.month;
+  }
+
+  didDismissMonth(event: CustomEvent) {
+    if (!event.detail) {
+      this.month = event.detail.data;
+
+      this.calculateAge();
+    }
+  }
+
+  onYearChange(event: CustomEvent) {
+    this.year = event.detail.value;
+    this.oldYear = this.year;
+  }
+
+  didDismissYear(event: CustomEvent) {
+    if (!event.detail) {
+      this.year = event.detail.data;
+
+      this.calculateAge();
     }
   }
 
@@ -49,6 +86,25 @@ export class Tab1Page {
       const ageDifMs = Date.now() - birthDate.getTime();
       const ageDate = new Date(ageDifMs);
       this.age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+  }
+
+  // Função para abrir o seletor de arquivo do avatar
+  selectImage() {
+    if (this.fileInput && this.fileInput.nativeElement) {
+      this.fileInput.nativeElement.click(); // Aciona o clique no input de arquivo oculto
+    }
+  }
+
+  // Função para tratar o upload de arquivo
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.photo = reader.result || '';  // Garante que 'null' não seja atribuído
+      };
+      reader.readAsDataURL(file);
     }
   }
 
