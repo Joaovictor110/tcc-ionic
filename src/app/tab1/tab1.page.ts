@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MESES } from '../enum/meses.enum';
 
 @Component({
   selector: 'app-tab1',
@@ -9,26 +11,27 @@ export class Tab1Page {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;  // Referência ao input de arquivo
 
   dias = Array.from({ length: 31 }, (_, i) => i + 1);
-  meses: string[] = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-  ];
+  meses = Object.keys(MESES).filter(mes => isNaN(Number(mes)));
   anos: number[] = [];
 
   // Variáveis para armazenar os dados do formulário
-  name!: string;
-  email!: string;
-  nickname!: string;
-  shirtNumber!: number;
-  position!: string;
+  formulario: FormGroup = new FormGroup({
+    name: new FormControl(),
+    email: new FormControl(),
+    nickname: new FormControl(),
+    shirtNumber: new FormControl(),
+    position: new FormControl(),
+    profileId: new FormControl(12345),
+  });
+  
   day: number = this.dias[0];
-  oldDay: number = this.day;
   month: number = 1;
-  oldMonth: number = this.month;
   year!: number;
+  oldDay: number = this.day;
+  oldMonth: number = this.month;
   oldYear!: number;
   age: number = 0;
-  profileId: number = 12345; // Exemplo de ID fixo
+
   photo: string | ArrayBuffer = ''; // Variável para armazenar a URL da foto
 
   constructor() {
@@ -46,11 +49,9 @@ export class Tab1Page {
   }
 
   didDismissDay(event: CustomEvent) {
-    if (!event.detail) {
-      this.day = event.detail.data;
+    this.day = event.detail.data;
 
-      this.calculateAge();
-    }
+    this.calculateAge();
   }
 
   onMonthChange(event: CustomEvent) {
@@ -58,12 +59,18 @@ export class Tab1Page {
     this.oldMonth = this.month;
   }
 
-  didDismissMonth(event: CustomEvent) {
-    if (!event.detail) {
-      this.month = event.detail.data;
+  calculaQtdeDiasNoMes() {
+    const nomeMes = Object.keys(MESES)[this.month+2] as keyof typeof MESES;
+    const qtdeDias = MESES[nomeMes];
 
-      this.calculateAge();
-    }
+    this.dias = Array.from({ length: qtdeDias }, (_, i) => i + 1);
+  }
+
+  didDismissMonth(event: CustomEvent) {
+    this.month = event.detail.data;
+
+    this.calculaQtdeDiasNoMes();
+    this.calculateAge();
   }
 
   onYearChange(event: CustomEvent) {
@@ -72,11 +79,9 @@ export class Tab1Page {
   }
 
   didDismissYear(event: CustomEvent) {
-    if (!event.detail) {
-      this.year = event.detail.data;
+    this.year = event.detail.data;
 
-      this.calculateAge();
-    }
+    this.calculateAge();
   }
 
   // Função para calcular a idade com base na data de nascimento
@@ -112,13 +117,13 @@ export class Tab1Page {
   saveProfile() {
     // Lógica de salvamento - por exemplo, enviar os dados para uma API ou localStorage
     console.log('Perfil salvo!', {
-      name: this.name,
-      email: this.email,
-      nickname: this.nickname,
-      shirtNumber: this.shirtNumber,
-      position: this.position,
+      name: this.formulario.controls['name'].value,
+      email: this.formulario.controls['email'].value,
+      nickname: this.formulario.controls['nickname'].value,
+      shirtNumber: this.formulario.controls['shirtNumber'].value,
+      position: this.formulario.controls['position'].value,
       age: this.age,
-      profileId: this.profileId,
+      profileId: this.formulario.controls['profileId'].value,
     });
   }
 }
