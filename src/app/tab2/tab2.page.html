@@ -1,55 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Calendário de Jogos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button class="botao-sair" defaultHref="/tabs/tab1"></ion-back-button> <!-- Botão de sair -->
+    </ion-buttons>
+    <ion-title>
+      <div class="titulo">
+        Minhas solicitações
+      </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card class="calendar-card">
-    <ion-item lines="none">
-      <ion-icon name="calendar-outline" slot="start"></ion-icon>
-      <ion-label>Calendário de jogos</ion-label>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let solicitacao of solicitacoes">
+      <ion-avatar slot="start">
+        <img [src]="solicitacao.imagem" alt="Avatar">
+      </ion-avatar>
+      <ion-buttons slot="end">
+        <ion-button color="success" (click)="aprovarSolicitacao(solicitacao)">
+          <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="rejeitarSolicitacao(solicitacao)">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
-    <ion-list>
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/5XWORGLJBBMT3ADPA3WPSMRP64.jpg?auth=758d035163504a49c106e06a732e113035e25df10b7929266668c958ad5b2ace&width=800&height=600" />
-        </ion-avatar>
-        <ion-label>Time A x Time B</ion-label>
-        <ion-avatar slot="end">
-          <img src="https://www.karinaaviamentos.com/wp-content/uploads/2020/09/BARCELONA.jpg" />
-        </ion-avatar>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://www.lance.com.br/galerias/wp-content/uploads/2024/01/Real-Madrid-1-332x474.png" />
-        </ion-avatar>
-        <ion-label>Time C x Time D</ion-label>
-        <ion-avatar slot="end">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/1200px-Borussia_Dortmund_logo.svg.png" />
-        </ion-avatar>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://cuponomia-a.akamaihd.net/blog/wp-content/uploads/2017/06/Manchester_City_2016-700x700.png" />
-        </ion-avatar>
-        <ion-label>Time E x Time F</ion-label>
-        <ion-avatar slot="end">
-          <img src="https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png" />
-        </ion-avatar>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://conteudo.imguol.com.br/c/esporte/30/2020/04/17/escudo-manchester-united-1587164317440_v2_300x300.pngx" />
-        </ion-avatar>
-        <ion-label>Time G x Time H</ion-label>
-        <ion-avatar slot="end">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6eBOI73x3tioOvxq_noW6uLK8bCiznkVHEA&s" />
-        </ion-avatar>
-      </ion-item>
-    </ion-list>
-  </ion-card>
+  </ion-list>
 </ion-content>

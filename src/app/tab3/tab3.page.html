@@ -1,17 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top-buttons-container">
+    <!-- Botão de Voltar -->
+    <ion-button fill="clear" class="back-button" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Div para Meus Torneios -->
+    <div class="meus-torneios" (click)="openMyTournaments()">
+      Meus torneios
+      <ion-icon name="trophy-outline" class="trophy-icon"></ion-icon>
+    </div>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="torneios-container">
+    <!-- Primeiro Card -->
+    <div class="tournament-card">
+      <div class="overlay">
+        <h2 class="tournament-title">Campeonato Municipal de Futebol Amador 2024</h2>
+        <ion-button class="calendar-button" fill="solid" (click)="openCalendar()">
+          Calendário
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Segundo Card -->
+    <div class="tournament-card2">
+      <div class="overlay">
+        <h2 class="tournament-title">Torneio Amistoso de Verão 2024</h2>
+        <ion-button class="calendar-button" fill="solid" (click)="openCalendar()">
+          Calendário
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Terceiro Card -->
+    <div class="tournament-card3">
+      <div class="overlay">
+        <h2 class="tournament-title">Copa de Futebol Interbairros 2024</h2>
+        <ion-button class="calendar-button" fill="solid" (click)="openCalendar()">
+          Calendário
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

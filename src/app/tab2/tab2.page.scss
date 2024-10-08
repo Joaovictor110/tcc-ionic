@@ -1,32 +1,65 @@
-ion-card {
-  background-color: #1e1e2d;
-  border-radius: 15px;
-  padding: 15px;
-  color: #fff;
+ion-content {
+  --background: #1e1e2d;
 }
 
-.calendar-card ion-icon {
-  color: #fbc02d;
+ion-toolbar {
+  --background: transparent;
+}
+
+.titulo {
+  background-color: #dabb54;
+  color: #000000;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.botao-sair {
+  background-color: transparent; /* Removemos a cor de fundo do botão */
+  border: none; /* Remove borda padrão */
+  border-radius: 50%; /* Borda arredondada */
+}
+
+.icone-sair {
+  color: #dabb54; /* Cor do ícone de sair */
 }
 
 ion-item {
-  background-color: #2e2e3e;
-  margin-bottom: 10px;
-  border-radius: 10px;
-}
-
-ion-label {
-  color: #fff;
-  font-size: 1rem;
+  background-color: #26263a;
+  border-radius: 12px;
+  margin: 10px;
+  padding: 10px;
+  --color: #fff;
 }
 
 ion-avatar {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o avatar */
+  }
 }
 
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+ion-button {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin: 0 5px;
 }
+
+ion-button[color="success"] {
+  --background: #4CAF50;
+}
+
+ion-button[color="danger"] {
+  --background: #F44336;
+}
+
+
